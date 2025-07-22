@@ -168,6 +168,14 @@ include __DIR__ . '/includes/header.php';
         </a>
 
         <?php if ($_SESSION['role'] === 'admin'): ?>
+        <a href="reports/" class="flex items-center p-4 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition duration-200 group">
+            <i class="fas fa-chart-bar text-2xl text-indigo-600 group-hover:scale-110 transition duration-200"></i>
+            <div class="ml-3">
+                <p class="text-sm font-medium text-gray-900">ລາຍງານ</p>
+                <p class="text-xs text-gray-600">ສົ່ງອອກຂໍ້ມູນ</p>
+            </div>
+        </a>
+
         <a href="majors/" class="flex items-center p-4 bg-yellow-50 rounded-lg hover:bg-yellow-100 transition duration-200 group">
             <i class="fas fa-book text-2xl text-yellow-600 group-hover:scale-110 transition duration-200"></i>
             <div class="ml-3">

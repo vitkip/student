@@ -185,7 +185,7 @@ include __DIR__ . '/../includes/header.php';
                 <!-- District -->
                 <div>
                     <label for="district" class="block text-sm font-medium text-gray-700 mb-2">
-                        ອໍາເພອ
+                        ເມືອງ
                     </label>
                     <input type="text" 
                            id="district" 

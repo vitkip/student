@@ -40,7 +40,36 @@ include __DIR__ . '/../includes/header.php';
         </h1>
         <p class="text-gray-600">ຈັດການຂໍ້ມູນນັກສຶກສາທັງໝົດ</p>
     </div>
-    <div class="mt-4 md:mt-0">
+    <div class="mt-4 md:mt-0 flex flex-col sm:flex-row gap-3">
+        <?php if ($_SESSION['role'] === 'admin'): ?>
+        <div class="relative">
+            <button id="export-dropdown-button" 
+                    class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg transition duration-200 inline-flex items-center">
+                <i class="fas fa-download mr-2"></i>ສົ່ງອອກ
+                <i class="fas fa-chevron-down ml-2"></i>
+            </button>
+            <div id="export-dropdown" 
+                 class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-10">
+                <div class="py-2">
+                    <a href="/students/controllers/ExportController.php?type=students&format=excel<?php echo !empty($search) ? '&search=' . urlencode($search) : ''; ?>" 
+                       target="_blank"
+                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-file-excel mr-2 text-green-600"></i>ສົ່ງອອກ Excel
+                    </a>
+                    <a href="/students/controllers/ExportController.php?type=students&format=pdf<?php echo !empty($search) ? '&search=' . urlencode($search) : ''; ?>" 
+                       target="_blank"
+                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-file-pdf mr-2 text-red-600"></i>ສົ່ງອອກ PDF
+                    </a>
+                    <div class="border-t border-gray-200 my-1"></div>
+                    <a href="/students/views/reports/" 
+                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-chart-bar mr-2 text-blue-600"></i>ລາຍງານລະອຽດ
+                    </a>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
         <a href="create.php" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition duration-200 inline-flex items-center">
             <i class="fas fa-plus mr-2"></i>ເພີ່ມນັກສຶກສາໃໝ່
         </a>
@@ -95,8 +124,8 @@ include __DIR__ . '/../includes/header.php';
                 <tr>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ຮູບ</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ລະຫັດ</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ຊື່ ແລະ ນາມສະກຸນ</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ເພດ</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ຊື່ ແລະ ນາມສະກຸນ</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ສາຂາວິຊາ</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ປີການສຶກສາ</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ການດໍາເນີນການ</th>
@@ -118,6 +147,9 @@ include __DIR__ . '/../includes/header.php';
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         <?php echo htmlspecialchars($student['student_id']); ?>
                     </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <?php echo htmlspecialchars($student['gender']); ?>
+                    </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div class="text-sm font-medium text-gray-900">
                             <?php echo htmlspecialchars($student['first_name'] . ' ' . $student['last_name']); ?>
@@ -126,15 +158,14 @@ include __DIR__ . '/../includes/header.php';
                             <?php echo htmlspecialchars($student['email']); ?>
                         </div>
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        <?php echo htmlspecialchars($student['gender']); ?>
-                    </td>
+                    
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         <?php echo htmlspecialchars($student['major_name'] ?? '-'); ?>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         <?php echo htmlspecialchars($student['year'] ?? '-'); ?>
                     </td>
+                    <?php if ($_SESSION['role'] === 'admin'): ?>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
                         <a href="view.php?id=<?php echo $student['id']; ?>" 
                            class="text-blue-600 hover:text-blue-900" title="ເບິ່ງລາຍລະອຽດ">
@@ -144,12 +175,18 @@ include __DIR__ . '/../includes/header.php';
                            class="text-indigo-600 hover:text-indigo-900" title="ແກ້ໄຂ">
                             <i class="fas fa-edit"></i>
                         </a>
+                        <a href="/students/controllers/ExportController.php?action=student_card&id=<?php echo $student['id']; ?>" 
+                           class="text-green-600 hover:text-green-900" title="ພິມບັດນັກສຶກສາ"
+                           target="_blank">
+                            <i class="fas fa-id-card"></i>
+                        </a>
                         <a href="delete.php?id=<?php echo $student['id']; ?>" 
                            class="text-red-600 hover:text-red-900" title="ລົບ"
                            onclick="return confirmDelete('ທ່ານຕ້ອງການລົບນັກສຶກສາ <?php echo htmlspecialchars($student['first_name'] . ' ' . $student['last_name']); ?> ແທ້ບໍ?')">
                             <i class="fas fa-trash"></i>
                         </a>
                     </td>
+                    <?php endif; ?>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -212,3 +249,30 @@ include __DIR__ . '/../includes/header.php';
 </div>
 
 <?php include __DIR__ . '/../includes/footer.php'; ?>
+
+<script>
+// Dropdown functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const dropdownButton = document.getElementById('export-dropdown-button');
+    const dropdown = document.getElementById('export-dropdown');
+    
+    if (dropdownButton && dropdown) {
+        dropdownButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            dropdown.classList.toggle('hidden');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!dropdownButton.contains(e.target) && !dropdown.contains(e.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
+    }
+});
+
+// Confirm delete function
+function confirmDelete(message) {
+    return confirm(message);
+}
+</script>

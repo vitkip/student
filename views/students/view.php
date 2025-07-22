@@ -106,6 +106,13 @@ $page_title = 'ລາຍລະອຽດນັກສຶກສາ';
                                     <p class="text-lg text-blue-600 font-medium mt-1">
                                         ລະຫັດນັກສຶກສາ: <?php echo htmlspecialchars($student->student_id); ?>
                                     </p>
+                                    <div class="mt-3">
+                                        <a href="/students/controllers/ExportController.php?action=student_card&id=<?php echo $student->id; ?>"
+                                           class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition duration-200"
+                                           target="_blank">
+                                            <i class="fas fa-id-card mr-2"></i> ພິມບັດນັກສຶກສາ
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -147,7 +154,7 @@ $page_title = 'ລາຍລະອຽດນັກສຶກສາ';
                                             <label class="block text-sm font-medium text-gray-600">ເພດ</label>
                                             <p class="text-lg text-gray-900">
                                                 <?php 
-                                                echo $student->gender == 'male' ? 'ຊາຍ' : 'ຍິງ';
+                                                echo !empty($student->gender) ? htmlspecialchars($student->gender) : '-';
                                                 ?>
                                             </p>
                                         </div>

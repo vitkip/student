@@ -91,6 +91,9 @@
                         <a href="/students/views/years/" class="text-white hover:text-blue-200 transition duration-200">
                             <i class="fas fa-calendar mr-2"></i>ປີການສຶກສາ
                         </a>
+                        <a href="/students/views/reports/" class="text-white hover:text-blue-200 transition duration-200">
+                            <i class="fas fa-chart-bar mr-2"></i>ລາຍງານ
+                        </a>
                         <?php endif; ?>
                     </div>
                     
@@ -135,6 +138,9 @@
                     </a>
                     <a href="/students/views/years/" class="text-white hover:text-blue-200 py-3 px-4 rounded-lg hover:bg-blue-700 transition duration-200 btn-touch">
                         <i class="fas fa-calendar mr-3 w-5 text-center"></i>ປີການສຶກສາ
+                    </a>
+                    <a href="/students/views/reports/" class="text-white hover:text-blue-200 py-3 px-4 rounded-lg hover:bg-blue-700 transition duration-200 btn-touch">
+                        <i class="fas fa-chart-bar mr-3 w-5 text-center"></i>ລາຍງານ
                     </a>
                     <?php endif; ?>
                     

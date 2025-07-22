@@ -264,5 +264,83 @@ class Student {
         
         return $stmt->fetchAll();
     }
+    
+    // ດຶງຂໍ້ມູນນັກສຶກສາທັງໝົດສໍາລັບລາຍງານ
+    public function getAllForReport($search = '', $major_id = '', $academic_year_id = '') {
+        $query = "SELECT s.*, m.name as major_name, m.code as major_code, ay.year 
+                  FROM " . $this->table_name . " s
+                  LEFT JOIN majors m ON s.major_id = m.id
+                  LEFT JOIN academic_years ay ON s.academic_year_id = ay.id
+                  WHERE 1=1";
+        
+        $params = [];
+        
+        if (!empty($search)) {
+            $query .= " AND (s.first_name LIKE :search 
+                       OR s.last_name LIKE :search 
+                       OR s.student_id LIKE :search
+                       OR s.email LIKE :search)";
+            $params[':search'] = "%{$search}%";
+        }
+        
+        if (!empty($major_id)) {
+            $query .= " AND s.major_id = :major_id";
+            $params[':major_id'] = $major_id;
+        }
+        
+        if (!empty($academic_year_id)) {
+            $query .= " AND s.academic_year_id = :academic_year_id";
+            $params[':academic_year_id'] = $academic_year_id;
+        }
+        
+        $query .= " ORDER BY s.student_id ASC";
+        
+        $stmt = $this->conn->prepare($query);
+        
+        foreach ($params as $key => $value) {
+            $stmt->bindValue($key, $value);
+        }
+        
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+    
+    // ດຶງຊື່ສາຂາວິຊາ
+    public function getMajorName() {
+        if (empty($this->major_id)) {
+            return '-';
+        }
+        
+        $query = "SELECT name FROM majors WHERE id = :major_id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':major_id', $this->major_id);
+        $stmt->execute();
+        
+        if($stmt->rowCount() > 0) {
+            $row = $stmt->fetch();
+            return $row['name'];
+        }
+        
+        return '-';
+    }
+    
+    // ດຶງຊື່ປີການສຶກສາ
+    public function getYearName() {
+        if (empty($this->academic_year_id)) {
+            return '-';
+        }
+        
+        $query = "SELECT year FROM academic_years WHERE id = :academic_year_id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':academic_year_id', $this->academic_year_id);
+        $stmt->execute();
+        
+        if($stmt->rowCount() > 0) {
+            $row = $stmt->fetch();
+            return $row['year'];
+        }
+        
+        return '-';
+    }
 }
 ?>

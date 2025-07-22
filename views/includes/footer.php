@@ -20,13 +20,13 @@
                 <div>
                     <h3 class="text-lg font-semibold mb-4">ຕິດຕໍ່</h3>
                     <div class="text-gray-300 space-y-2">
-                        <p><i class="fas fa-envelope mr-2"></i>admin@example.com</p>
-                        <p><i class="fas fa-phone mr-2"></i>+856 20 1234 5678</p>
+                        <p><i class="fas fa-envelope mr-2"></i>info@ontue-ttc.edu.la</p>
+                        <p><i class="fas fa-phone mr-2"></i>+856 20 7777 2338</p>
                     </div>
                 </div>
             </div>
             <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
-                <p>&copy; <?php echo date('Y'); ?> ລະບົບລົງທະບຽນການສຶກສາ. ທຸກສິດຖືກສະຫງວນໄວ້.</p>
+                <p>&copy; <?php echo date('Y'); ?> ລະບົບລົງທະບຽນການສຶກສາ. ວິທະຍາໄລຄູສົງອົງຕື້ ສະຫຽວນລິຂະສິດ.</p>
             </div>
         </div>
     </footer>

@@ -104,10 +104,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <h3 class="text-gray-700 text-sm font-medium mb-4 text-center">ບັນຊີທົດລອງ:</h3>
                     <div class="space-y-2 text-xs text-gray-600">
                         <div class="bg-gray-50 p-3 rounded">
-                            <strong>Admin:</strong> admin / password123
+                            <strong>Admin:</strong> admin / 123456
                         </div>
                         <div class="bg-gray-50 p-3 rounded">
-                            <strong>User:</strong> user / password123
+                            <strong>User:</strong> user / 123456
                         </div>
                     </div>
                 </div>
@@ -116,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <!-- Footer -->
         <div class="text-center mt-6 text-white text-sm">
-            <p>&copy; <?php echo date('Y'); ?> ລະບົບລົງທະບຽນການສຶກສາ. ທຸກສິດຖືກສະຫງວນໄວ້.</p>
+              <p>&copy; <?php echo date('Y'); ?> ລະບົບລົງທະບຽນການສຶກສາ. ວິທະຍາໄລຄູສົງອົງຕື້ ສະຫຽວນລິຂະສິດ.</p>
         </div>
     </div>
 
