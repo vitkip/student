@@ -1,0 +1,22 @@
+# Ignore uploaded files
+public/uploads/*.jpg
+public/uploads/*.jpeg
+public/uploads/*.png
+public/uploads/*.gif
+
+# Ignore temporary files
+*.tmp
+*.log
+
+# Ignore IDE files
+.vscode/
+.idea/
+*.sublime-*
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore backup files
+*.bak
+*.backup
